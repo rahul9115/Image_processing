@@ -3,15 +3,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from scipy import misc
-
 from PIL import Image
-
 mnist=tf.keras.datasets.mnist
 (x_train,y_train),(x_test,y_test)=mnist.load_data()
-
 x_train=tf.keras.utils.normalize(x_train,axis=1)
 x_test=tf.keras.utils.normalize(x_test,axis=1)
-
 model=tf.keras.models.Sequential()
 model.add(tf.keras.layers.Flatten(input_shape=(28,28)))
 model.add(tf.keras.layers.Dense(units=128,activation=tf.nn.relu))
@@ -23,13 +19,14 @@ accuracy,loss=model.evaluate(x_test,y_test)
 print(accuracy,loss)
 model.save('digits.model')
 new_model=tf.keras.models.load_model('digits.model')
-img=cv.imread("1.png")
-img=img.resize((28,28))
-print("This one",x_test[0].shape)
+img=cv.imread("2.png")
 
-predictions=new_model.predict(img)
+img=cv.resize(img,(28,28))
+print("The resized image is : ",np.asarray(img))
+data=np.asarray(img)
 
-
+data=data.reshape(3,28,28)
+predictions=new_model.predict([data])
 print(np.argmax(predictions[0]))
 plt.imshow(img)
 plt.show()
