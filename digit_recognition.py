@@ -19,15 +19,16 @@ accuracy,loss=model.evaluate(x_test,y_test)
 print(accuracy,loss)
 model.save('digits.model')
 new_model=tf.keras.models.load_model('digits.model')
-img=cv.imread("2.png")
-
-img=cv.resize(img,(28,28))
-print("The resized image is : ",np.asarray(img))
-data=np.asarray(img)
-
-data=data.reshape(3,28,28)
-predictions=new_model.predict([data])
-print(np.argmax(predictions[0]))
-plt.imshow(img)
-plt.show()
-    
+for i in range(0,4,1):
+    '''
+    img=cv.imread(f"{i}.png")
+    img=cv.resize(img,(28,28))
+    print("The resized image is : ",np.asarray(img))
+    data=np.asarray(img)
+    data=data.reshape(3,28,28)
+    '''
+    predictions=new_model.predict([x_test])
+    print(np.argmax(predictions[i]))
+    plt.imshow(x_test[i])
+    plt.show()
+        
