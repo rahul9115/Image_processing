@@ -28,7 +28,7 @@ for i in range(0,4,1):
     data=data.reshape(3,28,28)
     '''
     predictions=new_model.predict([x_test])
-    print(np.argmax(predictions[i]))
+    print(f'The prdicted number is : {np.argmax(predictions[i])}')
     plt.imshow(x_test[i])
     plt.show()
         
