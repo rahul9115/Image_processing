@@ -15,10 +15,14 @@ image=cv.drawContours(img,contours,110,(0,255,0),3)
 for cnt in contours:
     idx += 1
     x, y, w, h = cv.boundingRect(cnt)
+    
     roi = img[y:y + h, x:x + w]
+    
+
     if h < THIN_THRESHOLD or w < THIN_THRESHOLD:
         continue
-    cv.imwrite(str(idx) + '.png', roi)
-    cv.rectangle(img, (x, y), (x + w, y + h), (200, 0, 0), 2)
+    if(idx==110):
+        cv.imwrite(str(idx) + '.png', roi)
+        cv.rectangle(img, (x, y), (x + w, y + h), (200, 0, 0), 2)
 cv.imshow("Image",img)
 cv.waitKey(0)
