@@ -32,20 +32,20 @@ accuracy,loss=model.evaluate(x_testr,y_test)
 print(accuracy,loss)
 model.save('digits.model')
 new_model=tf.keras.models.load_model('digits.model')
-for i in range(2,8,1):
+for i in range(35,42,1):
     
-    img=cv.imread(f"{i}.png")
+    # img=cv.imread(f"{i}.png")
     
-    gray=cv.cvtColor(img,cv.COLOR_BGR2GRAY)
-    print("The resized image is : ",np.asarray(img))
-    img=cv.resize(gray,(28,28),cv.INTER_AREA)
+    # gray=cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+    # print("The resized image is : ",np.asarray(img))
+    # img=cv.resize(gray,(28,28),cv.INTER_AREA)
    
-    img=tf.keras.utils.normalize(img,axis=1)
-    data=np.array(img).reshape(-1,28,28,1)
+    # img=tf.keras.utils.normalize(img,axis=1)
+    # data=np.array(img).reshape(-1,28,28,1)
     
-    predictions=new_model.predict(data)
+    predictions=new_model.predict([x_testr])
     
-    print(f'The predicted number is : {np.argmax(predictions)}')
-    plt.imshow(img)
+    print(f'The predicted number is : {np.argmax(predictions[i])}')
+    plt.imshow(x_testr[i])
     plt.show()
         
