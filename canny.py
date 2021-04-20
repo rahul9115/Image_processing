@@ -1,7 +1,7 @@
 import numpy as np
 import cv2 as cv
 from matplotlib import pyplot as plt
-img = cv.imread('meter_image.png')
+img = cv.imread('hola.png')
 imggray=cv.cvtColor(img,cv.COLOR_BGR2GRAY)
 edges = cv.Canny(imggray,100,200)
 ret,thresh=cv.threshold(edges,127,255,0)

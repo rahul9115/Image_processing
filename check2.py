@@ -17,8 +17,12 @@ def digit_recognition():
             for j in i:
                 k=k+1
                 if k==2:
-                    final_digits.append(int(j))
-                    print(j)
+                    if(len(j)>1):
+                        val=list(j)
+                        final_digits.append(int(val[0]))
+                    else:
+                        final_digits.append(int(j))
+                        print(j)
                  
 def digit_extraction():
     x=2
