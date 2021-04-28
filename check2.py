@@ -6,11 +6,11 @@ final_digits=[]
 def digit_recognition():
     output1=[]
     k=0
-    for m in range(1,6,1):
+    for m in range(1,7,1):
         img=cv.imread(f"{m}.png")
-        img=cv.resize(img,(100,100),cv.INTER_AREA)
+        img=cv.resize(img,(300,300),cv.INTER_AREA)
         cv.imshow("image",img)
-        output=reader.readtext(img)
+        output=reader.readtext(img,allowlist="0123456789")
         k=0
         cv.waitKey(0)
         for i in output:
@@ -25,21 +25,36 @@ def digit_recognition():
                         print(j)
                  
 def digit_extraction():
-    x=2
-    w=30
-    y=9
-    h=25
-    for i in range(1,6,1):
+    x=28
+    w=25
+    #y=9
+    #h=25
+    y=0
+    h=35
+    #Capture image 4 values x=28 w=25 y=0 h=35
+    #Capture image 3 values x=0 w=27 y=0 h=40
+    #Capture image 2 values x=0 w=20 y=9 h=25
+    #Capture x=0 w=17 y=0 h=15
+
+
+    
+    for i in range(1,7,1):
         img=cv.imread("meter_image.png")
         roi = img[y:y + h, x:x + w]
-        x=x+30
+        x=x+w
         cv.imwrite(str(i) + '.png', roi)
     digit_recognition()  
 
 def image_crop():
-    img=cv.imread("meter.jpg")
-    plt.imshow(img[90:130,25:175])
-    img=img[90:130,25:175]
+    img=cv.imread("Capture4.PNG")
+    img=img[70:110,70:280]
+    plt.imshow(img)
+    plt.show()
+    cv.waitKey(0)
+    #img=img[70:110,80:280]
+    #img=img[70:90,80:180]Capture2
+    #plt.imshow(img[90:130,25:175]) meter.jpg
+    #img=img[90:130,25:175]
     cv.imwrite('meter_image.png', img)
     digit_extraction()
     
@@ -47,6 +62,3 @@ if __name__=="__main__":
     image_crop()
     with open('data.txt', 'w') as f:
         f.write(str(final_digits))
-   
-
-
