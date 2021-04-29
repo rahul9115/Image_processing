@@ -15,7 +15,7 @@ def digit_recognition():
         #Capture 2 100 resize 
         #Capture 100 resize 
         #gas_meter 220 resize
-        img=cv.resize(img,(200,200),cv.INTER_AREA)
+        img=cv.resize(img,(180,180),cv.INTER_AREA)
         cv.imshow("image",img)
         output=reader.readtext(img,allowlist="0123456789")
         k=0
@@ -46,7 +46,8 @@ def digit_extraction():
     #Capture x=0 w=17 y=0 h=15
     #meter.jpg x=2 w=30 y=9 h=25
     #gas_mter.jpeg x=0 w=75 #y=9 #h=100
-    #gas_meter1.jpeg x=0 w=60 #y=9 #h=100
+    #gas_meter1.jpeg x=0 w=60 #y=0 #h=100
+    #gas_meter_2.jpeg x=0 w=60 #y=0 #h=100
 
 
 
@@ -60,8 +61,10 @@ def digit_extraction():
     digit_recognition()  
 
 def image_crop():
-    img=cv.imread("gas_mter.jpeg")
-    img=img[360:450,220:1000]
+    img=cv.imread("gas_meter_2.jpeg")
+    img=img[365:440,237:834]
+    #img=cv.imread("gas_mter.jpeg")
+    #img=img[360:450,220:1000]
     plt.imshow(img)
     plt.show()
     cv.waitKey(0)
@@ -74,10 +77,11 @@ def image_crop():
     #img=img[90:130,25:175]
     #img=img[350:450,220:1000] gas_meter.jpeg
     #gas_meter1 img=img[360:450,220:1000]
+    #gas_meter_2 img=img[359:468,237:834]
     cv.imwrite('meter_image.png', img)
     digit_extraction()
     
 if __name__=="__main__":
     image_crop()
-    with open('data.txt', 'w') as f:
+    with open('data.txt', 'a') as f:
         f.write(str(final_digits))

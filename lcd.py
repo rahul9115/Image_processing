@@ -1,8 +1,7 @@
 import cv2 as cv
 import matplotlib.pyplot as plt
-img=cv.imread("gas_meter1.jpeg")
-
-img=img[331:421,200:720]
+img=cv.imread("gas_meter_2.jpeg")
+img=img[359:468,237:834]
 plt.imshow(img)
 x=0
 w=60
