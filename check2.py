@@ -6,9 +6,15 @@ final_digits=[]
 def digit_recognition():
     output1=[]
     k=0
-    for m in range(1,7,1):
+    for m in range(1,6,1):
         img=cv.imread(f"{m}.png")
-        img=cv.resize(img,(120,120),cv.INTER_AREA)
+        #Capture 6 120 resize 
+        #Capture 5 300 resize
+        #Capture 4 300 resize
+        #Capture 3 100 resize
+        #Capture 2 100 resize 
+        #Capture 100 resize 
+        img=cv.resize(img,(100,100),cv.INTER_AREA)
         cv.imshow("image",img)
         output=reader.readtext(img,allowlist="0123456789")
         k=0
@@ -20,28 +26,28 @@ def digit_recognition():
                     if(len(j)>1):
                         val=list(j)
                         final_digits.append(int(val[0]))
+                        print(val[0])
                     elif (j!=''):
                         final_digits.append(int(j))
                         print(j)
                  
 def digit_extraction():
-    x=5
-    w=28
-    #y=9
-    #h=25
-    y=5
-    h=40
+    x=2
+    w=30
+    y=9
+    h=25
     #Capture image 6 values x=5 w=28 y=5 h=40
     #Capture image 6 values x=5 w=45 y=5 h=50
     #Capture image 5 values x=5 w=45 y=0 h=50
     #Capture image 4 values x=28 w=25 y=0 h=35
-    #Capture image 3 values x=0 w=27 y=0 h=40
-    #Capture image 2 values x=0 w=20 y=9 h=25
+    #Capture image 3 values x=0 w=25 y=0 h=40
+    #Capture image 2 values x=0 w=20 y=0 h=20
     #Capture x=0 w=17 y=0 h=15
+    #meter.jpg x=2 w=30 y=9 h=25
 
 
     
-    for i in range(1,7,1):
+    for i in range(1,6,1):
         img=cv.imread("meter_image.png")
         roi = img[y:y + h, x:x + w]
         x=x+w
@@ -49,11 +55,12 @@ def digit_extraction():
     digit_recognition()  
 
 def image_crop():
-    img=cv.imread("Capture6.PNG")
-    img=img[52:78,30:200]
+    img=cv.imread("meter.jpg")
+    img=img[90:130,25:175]
     plt.imshow(img)
     plt.show()
     cv.waitKey(0)
+    #img=img[52:78,30:200]Capture6
     #img=img[90:140,56:343]Capture5
     #img=img[70:110,70:280]Capture 4
     #img=img[70:110,80:280]Capture3
